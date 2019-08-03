@@ -1,0 +1,11 @@
+body{
+    background: url("https://s2.best-wallpaper.net/wallpaper/3840x2160/1803/Star-Wars-BB8-robot-spaceship_3840x2160.jpg");
+    /* background: #070741 url("assets/img/Fondo/fondo.png") no-repeat fixed center;  */
+    /* background-size: cover;
+    /* min-height: 478px; */
+    background-attachment: fixed; 
+    background-repeat: no-repeat;
+    width: 100%;
+    height: auto;
+    
+}
