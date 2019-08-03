@@ -22,6 +22,6 @@ function calcular() {
     document.getElementById("Resultado").innerHTML = resultado;
 }
 
-function limpiar(){
-    localStorage.clear();
-}
+// function limpiar(){
+//     localStorage.clear();
+// }
