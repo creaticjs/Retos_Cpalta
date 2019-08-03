@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Eureka Technology</title>
+    <link
+      rel="stylesheet"
+      href="https://bootswatch.com/4/materia/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="bodyClass">
+    <div class="container" id="app">
+      <div>
+        <img
+          id="img"
+          src="/assets/images/eureka.JPG"
+          alt="PhoneShop"
+          width="200"
+          height="200"
+          aling="center"
+        />
+        <h1 style="text-align: center; font-family: 'Ubuntu', sans-serif;">
+          <strong>SECURITY EUREKA</strong>
+        </h1>
+      </div>
+      <div id="titulo" class="form-group">
+        <h3 class="">EQUIPOS DISPONIBLES:</h3>
+        <select
+          id="select"
+          class="form-control"
+          v-model="factura.equipoSeleccionado.celular"
+          @change="infoProductoSeleccionado"
+        >
+          <option value="">Seleccione un artículo ....</option>
+          <option v-for="equipo in equipos" :value="equipo.celular">
+            {{ equipo.nombre }}
+          </option>
+        </select>
+      </div>
+
+      <div class="card border-primary mb-3" style="max-width: 100rem; background-color: black">
+        <div class="card-header" style="font-size: 30px; color:white">
+          Información del Articulo
+        </div>
+        <div class="card-body">
+          <p style="font-size: 18px; color:white">
+            <strong style="color: rgb(250, 233, 0)">ID Articulo: </strong>
+            {{ factura.equipoSeleccionado.celular || "" }}
+          </p>
+          <p style="font-size: 18px; color:white">
+            <strong style="color: rgb(250, 233, 0)">Nombre Equipo: </strong>
+            {{ factura.equipoSeleccionado.nombre || "" }}
+          </p>
+          <p style="font-size: 18px; color:white">
+            <strong style="color: rgb(250, 233, 0)">PRECIO: </strong>
+            {{ factura.equipoSeleccionado.precio || "" }}
+          </p>
+        </div>
+        <div class="card-footer text-muted">
+          <div class="row">
+            <div class="col-md-3">
+              <label style="font-size: 23px; color:white">Cantidad:</label>
+            </div>
+            <div class="col-md-6">
+              <input
+                id="cantidad"
+                type="number"
+                min="0"
+                v-model="factura.equipoSeleccionado.cantidad"
+                required
+              />
+            </div>
+            <div class="col-md-3">
+              <a
+                style="font-size: 15px; color: white"
+				        class="btn btn-block btn-success"
+				        @click="agregarALista"
+                >COMPRAR</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <table id="" class="table-primary table table-bordered" style="font-size: 20px">
+          <thead>
+            <tr>
+              <th>ID Articulo</th>
+              <th>Nombre Equipo</th>
+              <th>Precio</th>
+              <th>Cantidad</th>
+              <th>Precio Total</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr v-for="(lista, indice) in factura.celularesAgregados">
+              <td>{{ lista.celular }}</td>
+              <td>{{ lista.nombre }}</td>
+              <td>{{ lista.precio }}</td>
+              <td width="100">
+                <input
+                  type="number"
+                  min="1"
+                  class="form-control input-sm"
+                  v-model="lista.cantidad"
+                />
+              </td>
+              <td>{{ lista.cantidad * lista.precio }}</td>
+            </tr>
+          </tbody>
+
+          <tfoot>
+            <tr>
+              <td colspan="5" class="text-left">
+                <strong>SUBTOTAL:</strong>
+                <strong>{{ total }}</strong>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="5" class="text-left">
+                <strong>TOTAL(+IVA (%19)):</strong>
+                <strong>{{ total | calcularIva }}</strong>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@2.4.2"></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>
